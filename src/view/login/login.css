@@ -1,0 +1,54 @@
+body{
+    background-color: #222222;
+
+}
+.login-content{
+    min-height: 100%;  
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+
+}
+
+.box {
+    
+    margin: auto;
+    justify-content: center;
+    height: 750px;
+    width: 510px;
+    background-color: #dedcdc;
+    color: #222222;
+
+}
+
+.btn-login{
+	background-color: #987ba6;
+}
+
+.btn-login:hover{
+	background-color: #a11212;
+}
+.inputUsuario{
+    color: aliceblue;
+    
+}
+
+.imput{
+    margin-top: 0px;
+    color: #a22222;
+    background-color: #ebebeb;
+
+}
+.form-control{
+    size: 500px;
+}
+
+.tela-login{
+    color: #fff;
+    background-color: #4c4c4c;
+    width: 510px;
+    height: 52px;
+    text-align: center;
+    margin: auto;
+    padding: 8px;
+}

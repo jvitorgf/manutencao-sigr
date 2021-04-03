@@ -1,0 +1,103 @@
+.div-corpo{
+    background-color: #000;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 1%;
+
+}
+.topo-site{
+    background-color: #0000;
+}
+.div-topo{
+    display: flex;
+	justify-content:center;
+	position:relative;
+    max-width: 1471px;
+}
+.div-logo{
+    max-width: 383px;
+	float: left; 
+	position:relative;
+    background-color: #dcdcdc;
+}
+.div-name-pagina{
+    max-width: 1200px;
+	float: right;
+	position:relative;
+    background-color: #dcdcdc; 
+}
+.div-text-pagina{  
+    width: 1200px;
+    height: 25%;
+	position:relative;
+    background-color: #4c4c4c;
+    float: left;
+    font: 40px sans-serif;
+    
+}
+.div-img-pagina{
+    height: 75%;
+	position:relative;
+    background-color: #dcdcdc;
+    float: right; 
+
+}
+.text-topo-pagina{
+    color: #dcdcdc;
+    margin-left: 30px;
+}
+.img_nome_pagina{
+    background-color: #dcdcdc;
+
+    
+}
+.corpo-site{
+    max-width: 1471px;   
+}
+.menu-site{
+    width: 383px;
+    height: 700px;
+    background-color: #222222;
+
+}
+
+.conteudo-site{
+
+    width: 1200px;
+    height: 700px;
+    background-color: #363636;
+    background-image: url("../../imagens/Tel_Cxa-v-1.0/Tel_Cxa-v-1_52.png");
+    
+}
+
+.botao-menu{
+    background-color:  #222222;
+    color: #fff;
+    font-size: 30px;
+    width: 300px;
+
+}
+a.botao-menu:hover{
+    background-color: #C0C0C0;
+}
+.conteudo-site-corpo{
+    background-color: #fff;
+    height: 680px;
+    width: 1170px; 
+    margin: 15px; 
+	float: right;
+    position:relative;
+    border-radius: 7px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    overflow: auto;
+}
+.text-menu{
+    text-align: center;
+    margin: 50px;
+    color: #bfbfbf;
+    align-items: center;
+
+}
