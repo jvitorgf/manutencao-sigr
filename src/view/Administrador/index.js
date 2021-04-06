@@ -32,13 +32,13 @@ function Administrador() {
     const storage = firebase.storage();
     const db = firebase.firestore();
 
-    function sair(){
+    function sair() {
         firebase.auth().signOut().then(resultado => {
             alert('Saiu com sucesso')
             setTimeout(() => {
                 dispatch({ type: 'LOGOUT', usuarioEmail: null });
             }, 200);
-        }).catch(erro =>{
+        }).catch(erro => {
             alert('erro');
         })
     }
@@ -75,7 +75,7 @@ function Administrador() {
     function remover() {
         if (itemId == null) {
             alert('Necessário consultar um item primeiramente')
-        } else if (window.confirm("Deseja confirmar a remoção ?"))  {
+        } else if (window.confirm("Deseja confirmar a remoção ?")) {
             firebase.firestore().collection('itens').doc(itemId).delete().then(() => {
                 firebase.storage().ref(`imagens/${imagem}`).delete()
             }).then(() => {
@@ -84,24 +84,33 @@ function Administrador() {
                 alert('Erro')
             })
 
-        } else{
-            alert('Item não removido') 
+        } else {
+            alert('Item não removido')
         }
     }
 
     function adicionarItem() {
-        storage.ref(`imagens/${imagem.name}`).put(imagem).then(() => {
-            db.collection('itens').add({
-                nome: nome,
-                descricao: descricao,
-                imagem: imagem.name,
-                valor: valor,
-            }).then(() => {
-                alert('item adicionado com sucesso')
-            }).catch(() => {
-                alert('erro')
-            });
-        })
+        if (nome !== undefined && nome.length > 0 && descricao !== undefined && descricao.length > 0 && imagem !== undefined && valor !== undefined && valor.length > 0) {
+            storage.ref(`imagens/${imagem.name}`).put(imagem).then(() => {
+                db.collection('itens').add({
+                    nome: nome,
+                    descricao: descricao,
+                    imagem: imagem.name,
+                    valor: valor,
+                }).then(() => {
+                    alert('item adicionado com sucesso')
+                }).catch(() => {
+                    alert('erro')
+                }).then(() => {
+                    setNome(undefined)
+                    setDescricao(undefined)
+                    setImagem(undefined)
+                    setValor(undefined)
+                });
+            })
+        } else {
+            alert('Por favor, preencha todos os campos e/ou selecione uma imagem.')
+        }
 
 
 
@@ -120,12 +129,19 @@ function Administrador() {
             }).then(() => {
                 alert('item editado com sucesso')
             }).catch(() => {
-                alert('erro') 
+                alert('erro')
             });
         })
     }
     function adicionarItensmenu() {
+        if(muda !== 0){
         setMuda(0)
+        setNome(undefined)
+        setDescricao(undefined)
+        setImagem(undefined)
+        setValor(undefined)
+    }
+        
     }
     function consultarItensmenu() {
         setMuda(1)
@@ -141,7 +157,7 @@ function Administrador() {
 
 
         <div className="div-corpo d-flex justify-content-center">
-                {useSelector(state => state.usuarioEmail === 'admin@sigr.com') ?
+            {useSelector(state => state.usuarioEmail === 'admin@sigr.com') ?
                 <>
 
                     <section className="topo-site">
@@ -155,7 +171,7 @@ function Administrador() {
                                     <img src={img_nome_pagina} alt="logo"></img>
                                 </div>
                                 <div className="div-text-pagina">
-                                     <h1 className="h4 text-topo-pagina text-right mr-2 mt-2">Seja bem vindo: {email}</h1> 
+                                    <h1 className="h4 text-topo-pagina text-right mr-2 mt-2">Seja bem vindo: {email}</h1>
                                 </div>
                             </div>
                         </div>
@@ -266,15 +282,15 @@ function Administrador() {
                     </section>
 
                 </>
-                
-                :<> {
-                    email === 'cozinha@sigr.com' ?<Redirect to="/cozinha"/>: 
-                    email === 'cliente@sigr.com' ?<Redirect to="/cliente"/>:
-                    email === 'cliente2@sigr.com' ?<Redirect to="/cliente"/>:
-                    email === 'cliente3@sigr.com' ?<Redirect to="/cliente"/>:
-                    email === 'cliente4@sigr.com' ?<Redirect to="/cliente"/>:
-                    email === 'caixa@sigr.com' ?<Redirect to="/caixa"/>:
-                    <Redirect  to="/"/>
+
+                : <> {
+                    email === 'cozinha@sigr.com' ? <Redirect to="/cozinha" /> :
+                        email === 'cliente@sigr.com' ? <Redirect to="/cliente" /> :
+                            email === 'cliente2@sigr.com' ? <Redirect to="/cliente" /> :
+                                email === 'cliente3@sigr.com' ? <Redirect to="/cliente" /> :
+                                    email === 'cliente4@sigr.com' ? <Redirect to="/cliente" /> :
+                                        email === 'caixa@sigr.com' ? <Redirect to="/caixa" /> :
+                                            <Redirect to="/" />
                 }
 
                 </>
