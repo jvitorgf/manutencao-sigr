@@ -266,7 +266,18 @@ function Administrador() {
                     </section>
 
                 </>
-                : <Redirect to="/"/>
+                
+                :<> {
+                    email === 'cozinha@sigr.com' ?<Redirect to="/cozinha"/>: 
+                    email === 'cliente@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'cliente2@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'cliente3@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'cliente4@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'caixa@sigr.com' ?<Redirect to="/caixa"/>:
+                    <Redirect  to="/"/>
+                }
+
+                </>
             }
 
 

@@ -12,7 +12,7 @@ import lanches from '../../imagens/Tel_Cliente-v-1.0/Tela-cliente-cardapio-v-0.3
 import sobremesas from '../../imagens/Tel_Cliente-v-1.0/Tela-cliente-cardapio-v-0.3_06.png';
 import Bebidas from '../../components/bebidas';
 import Pedidos from '../../components/pedido';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 
 
@@ -77,11 +77,21 @@ function Cliente() {
     }
 
     return (
-<>
-
-
+ 
+  <>
 
         <div className="div-corpo d-flex justify-content-center">
+            {       
+                    email === 'cozinha@sigr.com' ?<Redirect to="/cozinha"/>: 
+                    email === 'cliente@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'cliente2@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'cliente3@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'cliente4@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'admin@sigr.com' ?<Redirect to="/adm"/>:
+                    email === 'caixa@sigr.com' ?<Redirect to="/caixa"/>:
+                    <Redirect  to="/"/>
+                
+            }
 
             <section className=" topo-site">
                 <div className="div-topo">
@@ -157,7 +167,12 @@ function Cliente() {
                 </div>
             </section>
         </div>
-    </>)
+    </>
+    
+    
+    
+    
+    )
 }
 
 

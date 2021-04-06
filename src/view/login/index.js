@@ -13,6 +13,7 @@ function Login() {
     const dispatch = useDispatch();
     const [email, setEmail] = useState();
     const [senha, setSenha] = useState();
+    const email2 = useSelector(state => state.usuarioEmail);
 
     
 
@@ -36,6 +37,16 @@ function Login() {
     return (
        
         <div className="login-content">
+            {    
+                    email2 === 'cozinha@sigr.com' ?<Redirect to="/cozinha"/>: 
+                    email2 === 'cliente@sigr.com' ?<Redirect to="/cliente"/>:
+                    email2 === 'cliente2@sigr.com' ?<Redirect to="/cliente"/>:
+                    email2 === 'cliente3@sigr.com' ?<Redirect to="/cliente"/>:
+                    email2 === 'cliente4@sigr.com' ?<Redirect to="/cliente"/>:
+                    email2 === 'admin@sigr.com' ?<Redirect to="/adm"/>:
+                    email2 === 'caixa@sigr.com' ?<Redirect to="/caixa"/>:
+                    <Redirect  to="/"/>
+            }
             
             {
                 useSelector(state => state.usuarioLogado) > 0 && email === 'admin@sigr.com' ? <Redirect to="/adm" ></Redirect> : null

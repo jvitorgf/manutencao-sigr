@@ -4,7 +4,7 @@ import img_logo from '../../imagens/Tel_Cxa-v-1.0/Tel_Cxa-v-1_01.png'
 import img_nome_pagina from '../../imagens/Tel_Cxa-v-1.0/Tel_Cxa-v-1_03.png'
 import firebase from '../../config/firebase'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 
 
@@ -227,6 +227,16 @@ function Caixa() {
 
     return (
         <div className="div-corpo d-flex justify-content-center">
+            {       
+                    email === 'cozinha@sigr.com' ?<Redirect to="/cozinha"/>: 
+                    email === 'cliente@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'cliente2@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'cliente3@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'cliente4@sigr.com' ?<Redirect to="/cliente"/>:
+                    email === 'admin@sigr.com' ?<Redirect to="/adm"/>:
+                    email === 'caixa@sigr.com' ?<Redirect to="/caixa"/>:
+                    <Redirect  to="/"/>
+            }
             <section className="topo-site">
                 <div className="div-topo">
                     <div className="div-logo">
