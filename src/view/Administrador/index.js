@@ -118,36 +118,51 @@ function Administrador() {
 
     function atualizar() {
 
-
-        firebase.storage().ref(`imagens/${imagem}`).delete();
-        firebase.storage().ref(`imagens/${imagem.name}`).put(imagem).then(() => {
-            firebase.firestore().collection('itens').doc(itemId).update({
-                nome: nome,
-                descricao: descricao,
-                imagem: imagem.name,
-                valor: valor,
-            }).then(() => {
-                alert('item editado com sucesso')
-            }).catch(() => {
-                alert('erro')
-            });
-        })
+        if (nome !== undefined && nome.length > 0 && descricao !== undefined && descricao.length > 0 && imagem !== undefined && valor !== undefined && valor.length > 0) {
+            firebase.storage().ref(`imagens/${imagem}`).delete();
+            firebase.storage().ref(`imagens/${imagem.name}`).put(imagem).then(() => {
+                firebase.firestore().collection('itens').doc(itemId).update({
+                    nome: nome,
+                    descricao: descricao,
+                    imagem: imagem.name,
+                    valor: valor,
+                }).then(() => {
+                    alert('item editado com sucesso')
+                }).catch(() => {
+                    alert('erro')
+                }).then(() => {
+                    setNome(undefined)
+                    setDescricao(undefined)
+                    setImagem(undefined)
+                    setValor(undefined)
+                });
+            })
+        } else {
+            alert('Por favor, preencha todos os campos e/ou selecione uma imagem.')
+        }
     }
     function adicionarItensmenu() {
-        if(muda !== 0){
-        setMuda(0)
-        setNome(undefined)
-        setDescricao(undefined)
-        setImagem(undefined)
-        setValor(undefined)
-    }
-        
+        if (muda !== 0) {
+            setMuda(0)
+            setNome(undefined)
+            setDescricao(undefined)
+            setImagem(undefined)
+            setValor(undefined)
+        }
+
     }
     function consultarItensmenu() {
         setMuda(1)
     }
     function editarItensmenu() {
-        setMuda(2)
+        if (muda !== 2) {
+            setMuda(2)
+            setNome(undefined)
+            setDescricao(undefined)
+            setImagem(undefined)
+            setValor(undefined)
+        }
+
     }
     function removerItensmenu() {
         setMuda(3)
