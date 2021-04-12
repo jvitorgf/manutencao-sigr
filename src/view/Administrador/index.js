@@ -90,7 +90,11 @@ function Administrador() {
     }
 
     function adicionarItem() {
-        if (nome !== undefined && nome.length > 0 && descricao !== undefined && descricao.length > 0 && imagem !== undefined && valor !== undefined && valor.length > 0) {
+        if (nome === undefined || nome.length <= 0 || descricao === undefined || descricao.length <= 0 || imagem === undefined || valor === undefined || valor.length <= 0) {
+            alert('Por favor, preencha todos os campos e/ou selecione uma imagem.')
+        } else if (valor <= 0) {
+            alert('Por favor, digite um valor maior que zero.')
+        } else  {
             storage.ref(`imagens/${imagem.name}`).put(imagem).then(() => {
                 db.collection('itens').add({
                     nome: nome,
@@ -108,9 +112,7 @@ function Administrador() {
                     setValor(undefined)
                 });
             })
-        } else {
-            alert('Por favor, preencha todos os campos e/ou selecione uma imagem.')
-        }
+        } 
 
 
 
@@ -118,7 +120,11 @@ function Administrador() {
 
     function atualizar() {
 
-        if (nome !== undefined && nome.length > 0 && descricao !== undefined && descricao.length > 0 && imagem !== undefined && valor !== undefined && valor.length > 0) {
+        if (nome === undefined || nome.length <= 0 || descricao === undefined || descricao.length <= 0 || imagem === undefined || valor === undefined || valor.length <= 0) {
+            alert('Por favor, preencha todos os campos e/ou selecione uma imagem.')
+        } else if (valor <= 0) {
+            alert('Por favor, digite um valor maior que zero.')
+        } else {
             firebase.storage().ref(`imagens/${imagem}`).delete();
             firebase.storage().ref(`imagens/${imagem.name}`).put(imagem).then(() => {
                 firebase.firestore().collection('itens').doc(itemId).update({
@@ -137,8 +143,6 @@ function Administrador() {
                     setValor(undefined)
                 });
             })
-        } else {
-            alert('Por favor, preencha todos os campos e/ou selecione uma imagem.')
         }
     }
     function adicionarItensmenu() {
@@ -232,7 +236,7 @@ function Administrador() {
                                                 </div>
                                                 <div className="form-group">
                                                     <label className="h4 col-md-6 offset-md-3">Valor</label>
-                                                    <div class="col-md-6 offset-md-3"><input onChange={(e) => setValor(e.target.value)} placeholder="Digite o valor do item" type="text" className="imput form-control" ></input></div>
+                                                    <div class="col-md-6 offset-md-3"><input type="number" onChange={(e) => setValor(e.target.value)} placeholder="Digite o valor do item" className="imput form-control" ></input></div>
 
                                                 </div>
                                                 <div class="col-md-6 offset-md-3"><button onClick={adicionarItem} type="button" className="botao-menu-corpo btn btn-lg btn-login text-white mt-2">Adicionar</button></div>
@@ -280,7 +284,7 @@ function Administrador() {
                                                 </div>
                                                 <div className="form-group">
                                                     <label className="h4 col-md-6 offset-md-3">Valor</label>
-                                                    <div class="col-md-6 offset-md-3"><input onChange={(e) => setValor(e.target.value)} placeholder="Digite o valor do item" type="text" className="imput form-control" ></input></div>
+                                                    <div class="col-md-6 offset-md-3"><input onChange={(e) => setValor(e.target.value)} placeholder="Digite o valor do item" type="number" className="imput form-control" ></input></div>
 
                                                 </div>
                                                 <div class="col-md-6 offset-md-3"><button onClick={atualizar} type="button" className="botao-menu-corpo btn btn-lg btn-login text-white mt-2">Editar</button></div>
