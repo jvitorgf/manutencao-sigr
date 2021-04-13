@@ -90,11 +90,15 @@ function Administrador() {
     }
 
     function adicionarItem() {
+        var imgCheck = imagem.name.split(".")
         if (nome === undefined || nome.length <= 0 || descricao === undefined || descricao.length <= 0 || imagem === undefined || valor === undefined || valor.length <= 0) {
             alert('Por favor, preencha todos os campos e/ou selecione uma imagem.')
         } else if (valor <= 0) {
             alert('Por favor, digite um valor maior que zero.')
-        } else  {
+        } else if (imgCheck[1] !== "jpeg" && imgCheck[1] !== "jpg" && imgCheck[1] !== "png" && imgCheck[1] !== "webp" && imgCheck[1] !== "svg") {
+            alert('Por favor, selecione um arquivo com extensão de imagem.')
+            console.log(imgCheck[1])
+        } else {
             storage.ref(`imagens/${imagem.name}`).put(imagem).then(() => {
                 db.collection('itens').add({
                     nome: nome,
@@ -112,18 +116,21 @@ function Administrador() {
                     setValor(undefined)
                 });
             })
-        } 
+        }
 
 
 
     }
 
     function atualizar() {
-
+        var imgCheck = imagem.name.split(".")
         if (nome === undefined || nome.length <= 0 || descricao === undefined || descricao.length <= 0 || imagem === undefined || valor === undefined || valor.length <= 0) {
             alert('Por favor, preencha todos os campos e/ou selecione uma imagem.')
         } else if (valor <= 0) {
             alert('Por favor, digite um valor maior que zero.')
+        } else if (imgCheck[1] !== "jpeg" && imgCheck[1] !== "jpg" && imgCheck[1] !== "png" && imgCheck[1] !== "webp" && imgCheck[1] !== "svg") {
+            alert('Por favor, selecione um arquivo com extensão de imagem.')
+            console.log(imgCheck[1])
         } else {
             firebase.storage().ref(`imagens/${imagem}`).delete();
             firebase.storage().ref(`imagens/${imagem.name}`).put(imagem).then(() => {
