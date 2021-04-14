@@ -90,7 +90,9 @@ function Administrador() {
     }
 
     function adicionarItem() {
-        var imgCheck = imagem.name.split(".")
+        if (imagem !== undefined) {
+            var imgCheck = imagem.name.split(".")
+        }
         if (nome === undefined || nome.length <= 0 || descricao === undefined || descricao.length <= 0 || imagem === undefined || valor === undefined || valor.length <= 0) {
             alert('Por favor, preencha todos os campos e/ou selecione uma imagem.')
         } else if (valor <= 0) {
@@ -123,7 +125,9 @@ function Administrador() {
     }
 
     function atualizar() {
-        var imgCheck = imagem.name.split(".")
+        if (imagem !== undefined) {
+            var imgCheck = imagem.name.split(".")
+        }
         if (nome === undefined || nome.length <= 0 || descricao === undefined || descricao.length <= 0 || imagem === undefined || valor === undefined || valor.length <= 0) {
             alert('Por favor, preencha todos os campos e/ou selecione uma imagem.')
         } else if (valor <= 0) {
