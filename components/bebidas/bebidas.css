@@ -1,0 +1,16 @@
+.img_menu{
+    width: 180px;
+    margin: 35px;
+    
+}
+
+.itens_menu{
+
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+
+}
+.itens_menu:hover{
+    background-color: rgb(151, 151, 151);
+}

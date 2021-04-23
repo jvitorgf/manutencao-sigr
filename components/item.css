@@ -1,0 +1,81 @@
+.title{
+    color: #ab3d2e
+}
+.menu-cardapio{
+    display: flex;
+    border: 3px solid #851106;
+    
+
+}
+.resize{
+    margin: auto;
+    margin-top: 5px;
+    width: 300px;
+    height: 150px;
+    max-width: 100%;
+    object-fit: cover;
+    
+
+    
+}
+
+
+.container{
+    margin: 0px;
+    display: flex;
+}
+.botao-text-esquerda{
+    float: left;
+    margin: auto;
+}
+.botao-text-direita{
+    float: right;
+    margin: auto;
+
+
+   
+}
+.custom-select{
+    margin: 5px;
+}
+.botao-cardapio-item{
+    height: 35px;
+    width: 123px;
+    background-color: #851106;
+    color: #fff;
+    white-space: nowrap;
+    margin: 5px;
+    
+}
+.botao-cardapio-item:hover{
+    background-color: #242424;
+    color: #fff;
+}
+
+
+.title-consulta{
+    font-size: 20px;
+}
+.menu-consulta{
+    margin: 5px;
+
+    border: 3px solid #851106;   
+}
+.consulta-text{
+    width: 300px;
+    height: 140px;
+    margin: 5px;
+
+    
+}
+.resize-adm{
+    
+    margin: auto;
+    margin-top: 5px;
+    width: 260px;
+    height: 200px;
+    max-width: 100%;
+    object-fit: cover;
+
+    
+}
