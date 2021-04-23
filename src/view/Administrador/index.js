@@ -64,6 +64,49 @@ function Administrador() {
                     }
 
                 })
+
+                if (consulta !== consulta.toUpperCase()) {
+                    resultado.docs.forEach(doc => {
+                        if (doc.data().nome.indexOf(consulta.toUpperCase()) >= 0) {
+                            listaItem.push({
+                                id: doc.id,
+                                ...doc.data()
+                            })
+                            setItemId(doc.id)
+                        }
+
+                    })
+
+                }
+                if (consulta !== consulta.toLowerCase()) {
+
+                    resultado.docs.forEach(doc => {
+                        if (doc.data().nome.indexOf(consulta.toLowerCase()) >= 0) {
+                            listaItem.push({
+                                id: doc.id,
+                                ...doc.data()
+                            })
+                            setItemId(doc.id)
+                        }
+
+                    })
+                }
+
+                if (consulta !== consulta[0].toUpperCase() + consulta[1] + consulta[2] + consulta[3] + consulta[4] + consulta[5] + consulta[6]) {
+
+                    resultado.docs.forEach(doc => {
+                        if (doc.data().nome.indexOf(consulta[0].toUpperCase() + consulta[1] + consulta[2] + consulta[3] + consulta[4] + consulta[5] + consulta[6]) >= 0) {
+                            listaItem.push({
+                                id: doc.id,
+                                ...doc.data()
+                            })
+                            setItemId(doc.id)
+                        }
+
+                    })
+                }
+
+
                 setItem(listaItem);
 
             })

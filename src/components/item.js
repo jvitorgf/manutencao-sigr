@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import './item.css'
 import firebase from '../../src/config/firebase'
 import { firestore } from "firebase";
 import { useSelector } from 'react-redux';
-import Pedidos from './pedido';
 
 
 function Item({ nome, descricao, imagem, valor, id, mesa, pedidoId, ordem }) {
@@ -11,6 +10,8 @@ function Item({ nome, descricao, imagem, valor, id, mesa, pedidoId, ordem }) {
     const [quantidade, setQuantidade] = useState();
     const [urlImagem, setUrlImagem] = useState();
     const timestamp = firestore.FieldValue.serverTimestamp();
+    const [newFlag, setnewFlag] = useState();
+
 
     var numMesa = null
     var usuarioEmail = useSelector(state => state.usuarioEmail);

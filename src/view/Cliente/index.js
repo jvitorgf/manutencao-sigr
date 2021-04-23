@@ -23,6 +23,8 @@ function Cliente() {
 
     var listaPedido = [];
     const [pedido, setPedido] = useState([]);
+    const [newPedido, setNewPedido] = useState([]);
+
 
 
     const storage = firebase.storage();
@@ -32,13 +34,13 @@ function Cliente() {
 
     const email = useSelector(state => state.usuarioEmail);
 
-    function sair(){
+    function sair() {
         firebase.auth().signOut().then(resultado => {
             alert('Saiu com sucesso')
             setTimeout(() => {
                 dispatch({ type: 'LOGOUT', usuarioEmail: null });
             }, 200);
-        }).catch(erro =>{
+        }).catch(erro => {
             alert('erro');
         })
     }
@@ -59,8 +61,9 @@ function Cliente() {
 
         })
     }
-    function pedidoss() {
-        db.collection('pedidos').orderBy('timestamp','asc').get().then(async (resultado) => {
+
+    function pedidos() {
+        db.collection('pedidos').orderBy('timestamp', 'asc').get().then(async (resultado) => {
 
             await resultado.docs.forEach(doc => {
 
@@ -76,102 +79,112 @@ function Cliente() {
         })
     }
 
+    useEffect(() => {
+
+        setTimeout(
+            () => pedidos(), 
+            1000
+          );
+        
+    })
+
+
     return (
- 
-  <>
 
-        <div className="div-corpo d-flex justify-content-center">
-            {       
-                    email === 'cozinha@sigr.com' ?<Redirect to="/cozinha"/>: 
-                    email === 'cliente@sigr.com' ?<Redirect to="/cliente"/>:
-                    email === 'cliente2@sigr.com' ?<Redirect to="/cliente"/>:
-                    email === 'cliente3@sigr.com' ?<Redirect to="/cliente"/>:
-                    email === 'cliente4@sigr.com' ?<Redirect to="/cliente"/>:
-                    email === 'admin@sigr.com' ?<Redirect to="/adm"/>:
-                    email === 'caixa@sigr.com' ?<Redirect to="/caixa"/>:
-                    <Redirect  to="/"/>
-                
-            }
+        <>
 
-            <section className=" topo-site">
-                <div className="div-topo">
-                    <div className="div-logo">
-                        <img src={img_logo} alt="logo"></img>
-                    </div>
+            <div className="div-corpo d-flex justify-content-center">
+                {
+                    email === 'cozinha@sigr.com' ? <Redirect to="/cozinha" /> :
+                        email === 'cliente@sigr.com' ? <Redirect to="/cliente" /> :
+                            email === 'cliente2@sigr.com' ? <Redirect to="/cliente" /> :
+                                email === 'cliente3@sigr.com' ? <Redirect to="/cliente" /> :
+                                    email === 'cliente4@sigr.com' ? <Redirect to="/cliente" /> :
+                                        email === 'admin@sigr.com' ? <Redirect to="/adm" /> :
+                                            email === 'caixa@sigr.com' ? <Redirect to="/caixa" /> :
+                                                <Redirect to="/" />
 
-                    <div className="div-name-pagina">
-                        <div className="div-img-pagina">
-                            <a href="#"><img src={bebidas} alt="logo" className="img-menu-cardapio"></img></a>
-                            <a href="#"><img src={pizzas} alt="logo" className="img-menu-cardapio"></img></a>
-                            <a href="#"><img src={porcoes} alt="logo" className="img-menu-cardapio"></img></a>
-                            <a href="#"><img src={lanches} alt="logo" className="img-menu-cardapio"></img></a>
-                            <a href="#"><img src={sobremesas} alt="logo" className="img-menu-cardapio"></img></a>
+                }
 
+                <section className=" topo-site">
+                    <div className="div-topo">
+                        <div className="div-logo">
+                            <img src={img_logo} alt="logo"></img>
                         </div>
-                        <div className="div-text-pagina">
-                            
-                            {
-                                useSelector(state => state.usuarioLogado) > 0 ? <h1 className="h4 text-topo-pagina text-right mr-2 mt-2">Seja bem vindo: {email}</h1>  : null }
-                        </div>
-                    </div>
-                </div>
-                <div className="div-topo">
-                    <div className="menu-site">
-                        <ul>
-                            <li><a href="#" class="botao-menu btn btn-block">Inicio</a></li>
-                            
-                            {
-                            useSelector(state => state.usuarioLogado) > 0 ?
-                                <>
-                               
-                               
-                                
-                                
-                                
-                                <li><a onClick={cardapio} href="#" class="botao-menu btn btn-block">Cardápio</a></li>
-                                <li><a onClick={pedidoss} class="botao-menu btn btn-block">Pedidos</a></li>
-                                <li><a href="#" onClick={sair} class="botao-menu btn btn-block">Sair</a></li>
-                                
-                                </> 
-                                :   <li><Link to="/" class="botao-menu btn btn-block">Fazer login</Link></li>
-                            }
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <div className="text-menu">
-                            <p>Sig-R Company</p>
-                            <p>Tel: 43 33500 0000</p>
-                            <p>www.sig-r.com.br</p>
-                        </div>
-                    </div>
-                    <div className="conteudo-site">
-                        <div className="conteudo-site-menu-cardapio">
-                            <div className="form-inline cardapio" >
-                                {
-                                    item.map(item => <Item key={item.id}  nome={item.nome} descricao={item.descricao} imagem={item.imagem} valor={item.valor} ordem={item.ordem} id={item.id}></Item>)
-                                }
+
+                        <div className="div-name-pagina">
+                            <div className="div-img-pagina">
+                                <a href="#"><img src={bebidas} alt="logo" className="img-menu-cardapio"></img></a>
+                                <a href="#"><img src={pizzas} alt="logo" className="img-menu-cardapio"></img></a>
+                                <a href="#"><img src={porcoes} alt="logo" className="img-menu-cardapio"></img></a>
+                                <a href="#"><img src={lanches} alt="logo" className="img-menu-cardapio"></img></a>
+                                <a href="#"><img src={sobremesas} alt="logo" className="img-menu-cardapio"></img></a>
 
                             </div>
-                        </div>
-                        <div className="conteudo-site-menu-pedido">
-                        <h4 className="strong mt-3 ml-3"> Lista de Pedidos</h4>
-                        <hr className="hr"/>
-                            <form className="form-group pedidos">
-                                {
-                                    pedido.map(pedidos => <Pedidos status={pedidos.status} key={pedidos.id} nome={pedidos.nome} quantidade={pedidos.quantidade} valor={pedidos.valor} mesa={pedidos.mesa} pedidoId={pedidos.id} timestamp={pedidos.timestamp}></Pedidos>)
-                                }
+                            <div className="div-text-pagina">
 
-                            </form>
+                                {
+                                    useSelector(state => state.usuarioLogado) > 0 ? <h1 className="h4 text-topo-pagina text-right mr-2 mt-2">Seja bem vindo: {email}</h1> : null}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </div>
-    </>
-    
-    
-    
-    
+                    <div className="div-topo">
+                        <div className="menu-site">
+                            <ul>
+                                <li><a href="#" class="botao-menu btn btn-block">Inicio</a></li>
+
+                                {
+                                    useSelector(state => state.usuarioLogado) > 0 ?
+                                        <>
+
+
+
+
+
+                                            <li><a onClick={cardapio} href="#" class="botao-menu btn btn-block">Cardápio</a></li>
+                                            <li><a onClick={pedidos} class="botao-menu btn btn-block">Pedidos</a></li>
+                                            <li><a href="#" onClick={sair} class="botao-menu btn btn-block">Sair</a></li>
+
+                                        </>
+                                        : <li><Link to="/" class="botao-menu btn btn-block">Fazer login</Link></li>
+                                }
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <div className="text-menu">
+                                <p>Sig-R Company</p>
+                                <p>Tel: 43 33500 0000</p>
+                                <p>www.sig-r.com.br</p>
+                            </div>
+                        </div>
+                        <div className="conteudo-site">
+                            <div className="conteudo-site-menu-cardapio">
+                                <div className="form-inline cardapio" >
+                                    {
+                                        item.map(item => <Item key={item.id} nome={item.nome} descricao={item.descricao} imagem={item.imagem} valor={item.valor} ordem={item.ordem} id={item.id}></Item>)
+                                    }
+
+                                </div>
+                            </div>
+                            <div className="conteudo-site-menu-pedido">
+                                <h4 className="strong mt-3 ml-3"> Lista de Pedidos</h4>
+                                <hr className="hr" />
+                                <form className="form-group pedidos">
+                                    {
+                                        pedido.map(pedidos => <Pedidos status={pedidos.status} key={pedidos.id} nome={pedidos.nome} quantidade={pedidos.quantidade} valor={pedidos.valor} mesa={pedidos.mesa} pedidoId={pedidos.id} timestamp={pedidos.timestamp}></Pedidos>)
+                                    }
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </>
+
+
+
+
     )
 }
 
