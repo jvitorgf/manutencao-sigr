@@ -9,13 +9,24 @@ import logo from '../../imagens/Tel_Log-v-1.0/Tel_Log-v-1_01.png';
 
 
 function Login() {
-    
+
     const dispatch = useDispatch();
     const [email, setEmail] = useState();
     const [senha, setSenha] = useState();
     const email2 = useSelector(state => state.usuarioEmail);
+    const [mostrarSenha, setMostrarSenha] = useState(false);
+    const [value, setValue] = useState("");
 
-    
+    const handleChange = e => {
+        setSenha(e.target.value)
+        setValue(e.target.value);
+    };
+
+    const mudarVisibilidade = () => {
+        setMostrarSenha(mostrarSenha ? false : true);
+    };
+
+
 
     function autenticar() {
 
@@ -33,38 +44,46 @@ function Login() {
 
     }
 
+    const handleKeypress = e => {
+
+        if (e.charCode === 13) {
+            autenticar();
+        }
+    };
+
+
 
     return (
-       
+
         <div className="login-content">
-            {    
-                    email2 === 'cozinha@sigr.com' ?<Redirect to="/cozinha"/>: 
-                    email2 === 'cliente@sigr.com' ?<Redirect to="/cliente"/>:
-                    email2 === 'cliente2@sigr.com' ?<Redirect to="/cliente"/>:
-                    email2 === 'cliente3@sigr.com' ?<Redirect to="/cliente"/>:
-                    email2 === 'cliente4@sigr.com' ?<Redirect to="/cliente"/>:
-                    email2 === 'admin@sigr.com' ?<Redirect to="/adm"/>:
-                    email2 === 'caixa@sigr.com' ?<Redirect to="/caixa"/>:
-                    <Redirect  to="/"/>
+            {
+                email2 === 'cozinha@sigr.com' ? <Redirect to="/cozinha" /> :
+                    email2 === 'cliente@sigr.com' ? <Redirect to="/cliente" /> :
+                        email2 === 'cliente2@sigr.com' ? <Redirect to="/cliente" /> :
+                            email2 === 'cliente3@sigr.com' ? <Redirect to="/cliente" /> :
+                                email2 === 'cliente4@sigr.com' ? <Redirect to="/cliente" /> :
+                                    email2 === 'admin@sigr.com' ? <Redirect to="/adm" /> :
+                                        email2 === 'caixa@sigr.com' ? <Redirect to="/caixa" /> :
+                                            <Redirect to="/" />
             }
-            
+
             {
                 useSelector(state => state.usuarioLogado) > 0 && email === 'admin@sigr.com' ? <Redirect to="/adm" ></Redirect> : null
             }
 
             {
-                useSelector(state => state.usuarioLogado) > 0 && email === 'cliente@sigr.com'  ? <Redirect to="/cliente" ></Redirect> : null
+                useSelector(state => state.usuarioLogado) > 0 && email === 'cliente@sigr.com' ? <Redirect to="/cliente" ></Redirect> : null
             }
 
-{
-                useSelector(state => state.usuarioLogado) > 0 && email === 'cliente2@sigr.com'  ? <Redirect to="/cliente" ></Redirect> : null
+            {
+                useSelector(state => state.usuarioLogado) > 0 && email === 'cliente2@sigr.com' ? <Redirect to="/cliente" ></Redirect> : null
             }
             {
-                useSelector(state => state.usuarioLogado) > 0 && email === 'cliente3@sigr.com'  ? <Redirect to="/cliente" ></Redirect> : null
+                useSelector(state => state.usuarioLogado) > 0 && email === 'cliente3@sigr.com' ? <Redirect to="/cliente" ></Redirect> : null
             }
 
-{
-                useSelector(state => state.usuarioLogado) > 0 && email === 'cliente4@sigr.com'  ? <Redirect to="/cliente" ></Redirect> : null
+            {
+                useSelector(state => state.usuarioLogado) > 0 && email === 'cliente4@sigr.com' ? <Redirect to="/cliente" ></Redirect> : null
             }
 
             {
@@ -84,10 +103,12 @@ function Login() {
 
                     </div>
                     <div className="form-group mb-5">
+
                         <label for="inputSenha" className="h4 col-md-6 offset-md-0">Senha</label>
-                        <div class="col-md-12 offset-md-0"><input onChange={(e) => setSenha(e.target.value)} placeholder="Digite sua senha" type="password" className="imput form-control my-2" id="inputSenha"></input></div>
+                        <div class="col-md-12 offset-md-0"><input onKeyPress={handleKeypress} onChange={handleChange} placeholder="Digite sua senha" type={mostrarSenha ? "text" : "password"} className="imput form-control my-2 " id="inputSenha"></input> <span onClick={mudarVisibilidade} className="fas fa-eye fa-2x iconEye">  </span></div>
                     </div>
-                    <div class="col-md-12 offset-md-2"><button onClick={autenticar} type="button" className="botao-menu-corpo btn btn-lg btn-login text-white mt-5">Entrar</button></div>
+
+                    <div class="col-md-12 offset-md-2"><button  onClick={autenticar} type="button" className="botao-menu-corpo btn btn-lg btn-login text-white mt-5">Entrar</button></div>
                 </form>
 
             </div>

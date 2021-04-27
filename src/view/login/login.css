@@ -52,3 +52,12 @@ body{
     margin: auto;
     padding: 8px;
 }
+
+.iconEye{
+    float: right;
+    margin-right: 6px;
+    margin-top: -45px;
+    position: relative;
+    z-index: 2;
+    
+}
