@@ -92,10 +92,10 @@ function Administrador() {
                     })
                 }
 
-                if (consulta !== consulta[0].toUpperCase() + consulta[1] + consulta[2] + consulta[3] + consulta[4] + consulta[5] + consulta[6]) {
+                if (consulta !== consulta[0].toUpperCase() + consulta.slice(1).toLowerCase()) {
 
                     resultado.docs.forEach(doc => {
-                        if (doc.data().nome.indexOf(consulta[0].toUpperCase() + consulta[1] + consulta[2] + consulta[3] + consulta[4] + consulta[5] + consulta[6]) >= 0) {
+                        if (doc.data().nome.indexOf(consulta[0].toUpperCase() + consulta.slice(1).toLowerCase()) >= 0) {
                             listaItem.push({
                                 id: doc.id,
                                 ...doc.data()
