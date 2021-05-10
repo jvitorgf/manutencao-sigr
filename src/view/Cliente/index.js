@@ -142,7 +142,6 @@ function Cliente() {
 
 
                                             <li><a onClick={cardapio} href="#" class="botao-menu btn btn-block">Cardápio</a></li>
-                                            <li><a onClick={pedidos} class="botao-menu btn btn-block">Pedidos</a></li>
                                             <li><a href="#" onClick={sair} class="botao-menu btn btn-block">Sair</a></li>
 
                                         </>
